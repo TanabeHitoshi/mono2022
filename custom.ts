@@ -8,7 +8,7 @@
 /**
  * Custom blocks
  */
-//% weight=100 color=#0fbc11 icon=""
+//% weight=100 color=#0f0f0f icon="\uf076" block="ものづくりコンテスト"
 namespace custom {
     /**
      * TODO: describe your function here
@@ -16,7 +16,7 @@ namespace custom {
      * @param s describe parameter here, eg: "Hello"
      * @param e describe parameter here
      */
-    //% block
+    //% block="初期化"
     export function foo(): void {
         // Add code here
         basic.clearScreen()
@@ -30,7 +30,6 @@ namespace custom {
      * @param value describe value here, eg: 5
      */
     //% block
-    export function fib(value: number): number {
-        return value <= 1 ? value : fib(value -1) + fib(value - 2);
+    export function fib(): void {
     }
 }
