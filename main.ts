@@ -1,3 +1,6 @@
+function 参考 (list: any[]) {
+	
+}
 function _74HC4094 (value: number) {
     pins.digitalWritePin(DigitalPin.P16, 0)
     i = 1
@@ -30,8 +33,10 @@ function フルカラーLED (数値: number, 数値2: number, 数値3: number) {
 let FullLED_Value = 0
 let tmp = 0
 let i = 0
+let 黒: number[] = []
 custom.initialize()
+参考(黒)
 basic.forever(function () {
-    フルカラーLED(0, 0, 1)
+    custom.フルカラーLED(1, 1, 1)
     basic.pause(1000)
 })

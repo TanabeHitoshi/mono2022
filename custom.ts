@@ -26,6 +26,21 @@ namespace custom {
         pins.setPull(DigitalPin.P9, PinPullMode.PullNone)
     }
 
+    //% block
+    export function フルカラーLED(R: number, G: number, B: number): void {
+        FullLED_Value = R * 8 + (G * 2 + B * 4)
+        pins.digitalWritePin(DigitalPin.P15, 0)
+        i = 1
+        for (let index = 0; index < 8; index++) {
+            tmp = Math.trunc(FullLED_Value / i)
+            pins.digitalWritePin(DigitalPin.P14, tmp % 2)
+            clk()
+            i = i * 2
+        }
+        pins.digitalWritePin(DigitalPin.P15, 1)
+
+    }
+
     /**
      * TODO: describe your function here
      * @param value describe value here, eg: 5
