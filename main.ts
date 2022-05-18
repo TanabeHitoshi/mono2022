@@ -17,12 +17,8 @@ function clk () {
 }
 let tmp = 0
 let i = 0
-basic.clearScreen()
-led.enable(false)
-pins.setPull(DigitalPin.P6, PinPullMode.PullNone)
-pins.setPull(DigitalPin.P7, PinPullMode.PullNone)
-pins.setPull(DigitalPin.P9, PinPullMode.PullNone)
+custom.initialize()
 basic.forever(function () {
-    _74HC4094(1000)
+    _74HC4094(255)
     basic.pause(1000)
 })

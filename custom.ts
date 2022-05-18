@@ -17,12 +17,13 @@ namespace custom {
      * @param e describe parameter here
      */
     //% block="初期化"
-    export function foo(): void {
+    export function initialize(): void {
         // Add code here
         basic.clearScreen()
         led.enable(false)
         pins.setPull(DigitalPin.P6, PinPullMode.PullNone)
         pins.setPull(DigitalPin.P7, PinPullMode.PullNone)
+        pins.setPull(DigitalPin.P9, PinPullMode.PullNone)
     }
 
     /**
