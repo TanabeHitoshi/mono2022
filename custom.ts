@@ -87,6 +87,22 @@ namespace custom {
         pins.setPull(DigitalPin.P7, PinPullMode.PullNone)
         pins.setPull(DigitalPin.P9, PinPullMode.PullNone)
     }
+    //% block
+    export function デジタル１(): any {
+        return pins.digitalReadPin(DigitalPin.P7)
+    }
+    //% block
+    export function デジタル２(): any {
+        return pins.digitalReadPin(DigitalPin.P6)
+    }
+    //% block
+    export function アナログ１(): any {
+        return pins.analogReadPin(AnalogPin.P4)
+    }
+    //% block
+    export function アナログ２(): any {
+        return pins.analogReadPin(AnalogPin.P3)
+    }
 
     //% block
     export function フルカラーLED(c:color_type): void {
@@ -127,7 +143,16 @@ namespace custom {
         pins.digitalWritePin(DigitalPin.P15, 1)
 
     }
-
+    //% block
+    export function モニタ(): void {
+        serial.writeNumbers([
+            pins.analogReadPin(AnalogPin.P3),
+            pins.analogReadPin(AnalogPin.P4),
+            pins.digitalReadPin(DigitalPin.P6),
+            pins.digitalReadPin(DigitalPin.P7)
+        ])
+        basic.pause(1000)
+    }
     /**
      * TODO: describe your function here
      * @param value describe value here, eg: 5
