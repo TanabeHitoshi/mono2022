@@ -33,6 +33,5 @@ let i = 0
 custom.initialize()
 basic.forever(function () {
     custom.フルカラーLED(color_type.yellow)
-    _74HC4094(142 * 256)
-    basic.pause(1000)
+    custom._74HC595(110 * 256)
 })

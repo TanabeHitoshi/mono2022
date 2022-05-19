@@ -88,6 +88,16 @@ namespace custom {
      * @param value describe value here, eg: 5
      */
     //% block
-    export function fib(): void {
+    export function _74HC595(value:number): void {
+        pins.digitalWritePin(DigitalPin.P16, 0)
+        i = 1
+        for (let index = 0; index < 16; index++) {
+            tmp = Math.trunc(value / i)
+            pins.digitalWritePin(DigitalPin.P14, tmp % 2)
+            clk()
+            i = i * 2
+        }
+        pins.digitalWritePin(DigitalPin.P16, 1)
+
     }
 }
