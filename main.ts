@@ -1,9 +1,17 @@
 custom.initialize()
 // custom.セグメントＬＥＤ(LED_view.e, LED_view.black)
 basic.forever(function () {
-    if (pins.digitalReadPin(DigitalPin.P7) == 0) {
-        custom.セグメントＬＥＤ(LED_view.black, LED_view.Hi)
+    if (custom.デジタル２() == 0) {
+        if (custom.デジタル１() == 0) {
+            custom.セグメントＬＥＤ(LED_view.Hi, LED_view.Hi)
+        } else {
+            custom.セグメントＬＥＤ(LED_view.Hi, LED_view.Low)
+        }
     } else {
-        custom.セグメントＬＥＤ(LED_view.black, LED_view.Low)
+        if (custom.デジタル１() == 0) {
+            custom.セグメントＬＥＤ(LED_view.Low, LED_view.Hi)
+        } else {
+            custom.セグメントＬＥＤ(LED_view.Low, LED_view.Low)
+        }
     }
 })
