@@ -13,7 +13,7 @@ enum color_type {
     //% block="緑"
     green,
     //% block="紫"
-    mazenta,
+    magenta,
     //% block="水色"
     cyan,
     //% block="黄"
@@ -25,7 +25,7 @@ enum color_type {
 /**
  * Custom blocks
  */
-//% weight=100 color=#0f0f0f icon="\uf076" block="ものづくりコンテスト"
+//% weight=100 color=#008080 icon="\uf076" block="ものづくりコンテスト"
 namespace custom {
     /**
      * TODO: describe your function here
@@ -46,28 +46,28 @@ namespace custom {
     //% block
     export function フルカラーLED(c:color_type): void {
         switch(c){
-            case 10:
-                FullLED_Value = 80
-                break;
-            case 1:
+            case color_type.black:
+                FullLED_Value = 0
+            break;
+            case color_type.red:
                 FullLED_Value= 8
             break;
-            case 2:
+            case color_type.blue:
                 FullLED_Value= 4
             break;
-            case 3:
+            case color_type.green:
                 FullLED_Value = 2
             break;
-            case 4:
+            case color_type.magenta:
                 FullLED_Value = 12
             break;
-            case 5:
+            case color_type.cyan:
                 FullLED_Value = 6
             break;
-            case 6:
+            case color_type.yellow:
                 FullLED_Value = 10
             break;
-            case 7:
+            case color_type.white:
                 FullLED_Value = 14
             break;
         }

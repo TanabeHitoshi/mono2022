@@ -30,14 +30,9 @@ function フルカラーLED (数値: number, 数値2: number, 数値3: number) {
 let FullLED_Value = 0
 let tmp = 0
 let i = 0
-let 黒: number[] = []
-function 参考 (list: any[]) {
-	
-}
 custom.initialize()
-参考(黒)
 basic.forever(function () {
-    custom.フルカラーLED(color_type.blue)
+    custom.フルカラーLED(color_type.yellow)
     _74HC4094(142 * 256)
     basic.pause(1000)
 })
