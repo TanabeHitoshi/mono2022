@@ -21,7 +21,50 @@ enum color_type {
     //% block="白"
     white
     }
+enum LED_view {
+    //% block="消灯"
+    black,
+    //% block="H"
+    Hi,
+    //% block="L"
+    Low,
+    //% block="-"
+    minus,
+    //% block="0"
+    zero,
+    //% block="1"
+    one,
+    //% block="2"
+    two,
+    //% block="3"
+    three,
+    //% block="4"
+    four,
+    //% block="5"
+    five,
+    //% block="6"
+    six,
+    //% block="7"
+    seven,
+    //% block="8"
+    eight,
+    //% block="9"
+    nine,
+    //% block="A"
+    a,
+    //% block="b"
+    b,
+    //% block="c"
+    c,
+    //% block="d"
+    d,
+    //% block="E"
+    e,
+    //% block="F"
+    f
 
+}
+let led_value:number
 /**
  * Custom blocks
  */
@@ -100,4 +143,133 @@ namespace custom {
         pins.digitalWritePin(DigitalPin.P16, 1)
 
     }
+    //% block
+    export function _7SEG(led_l: LED_view, led_r: LED_view): void {
+        switch(led_l){
+            case LED_view.black:
+                led_value = 0
+            break;
+            case LED_view.Hi:
+                led_value = 110
+            break;
+            case LED_view.Low:
+                led_value = 28
+            break;
+            case LED_view.minus:
+                led_value = 2
+            break;
+            case LED_view.zero:
+                led_value = 252
+            break;
+            case LED_view.one:
+                led_value = 96
+            break; 
+            case LED_view.two:
+                led_value = 218
+            break; 
+            case LED_view.three:
+                led_value = 242
+            break; 
+            case LED_view.four:
+                led_value = 102
+            break; 
+            case LED_view.five:
+                led_value = 182
+            break; 
+            case LED_view.six:
+                led_value = 190
+            break; 
+            case LED_view.seven:
+                led_value = 228
+            break; 
+            case LED_view.eight:
+                led_value = 254
+            break; 
+            case LED_view.nine:
+                led_value = 246
+            break; 
+            case LED_view.a:
+                led_value = 238
+            break; 
+            case LED_view.b:
+                led_value = 62
+            break; 
+            case LED_view.c:
+                led_value = 26
+            break; 
+            case LED_view.d:
+                led_value = 122
+            break; 
+            case LED_view.e:
+                led_value = 158
+            break; 
+            case LED_view.f:
+                led_value = 142
+            break;
+        }
+        switch (led_r) {
+            case LED_view.black:
+                led_value += 0 * 256
+                break;
+            case LED_view.Hi:
+                led_value += 110*256
+                break;
+            case LED_view.Low:
+                led_value += 28 * 256
+                break;
+            case LED_view.minus:
+                led_value += 2
+                break;
+             case LED_view.zero:
+                led_value += 252 * 256
+                break;
+            case LED_view.one:
+                led_value += 96 * 256
+                break;
+            case LED_view.two:
+                led_value += 218 * 256
+                break;
+            case LED_view.three:
+                led_value += 242 * 256
+                break;
+            case LED_view.four:
+                led_value += 102*256
+                break;
+            case LED_view.five:
+                led_value += 182 * 256
+                break;
+            case LED_view.six:
+                led_value += 190 * 256
+                break;
+            case LED_view.seven:
+                led_value += 228 * 256
+                break;
+            case LED_view.eight:
+                led_value += 254 * 256
+                break;
+            case LED_view.nine:
+                led_value += 246 * 256
+                break;
+            case LED_view.a:
+                led_value += 238 * 256
+                break;
+            case LED_view.b:
+                led_value += 62 * 256
+                break;
+            case LED_view.c:
+                led_value += 26 * 256
+                break;
+            case LED_view.d:
+                led_value += 122 * 256
+                break;
+            case LED_view.e:
+                led_value += 158 * 256
+                break;
+            case LED_view.f:
+                led_value += 142 * 256
+                break;
+        }
+        _74HC595(led_value)
+    }
+
 }
