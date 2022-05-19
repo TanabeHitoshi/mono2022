@@ -3,7 +3,9 @@
 * このファイルを使って、独自の関数やブロックを定義してください。
 * 詳しくはこちらを参照してください：https://makecode.microbit.org/blocks/custom
 */
-enum MyEnum {
+enum color_type {
+    //% block="消灯"
+    black,
     //% block="赤"
     red,
     //% block="青"
@@ -17,9 +19,7 @@ enum MyEnum {
     //% block="黄"
     yellow,
     //% block="白"
-    white,
-    //% block="消灯"
-    black
+    white
     }
 
 /**
@@ -44,8 +44,33 @@ namespace custom {
     }
 
     //% block
-    export function フルカラーLED(R: number, G: number, B: number): void {
-        FullLED_Value = R * 8 + (G * 2 + B * 4)
+    export function フルカラーLED(c:color_type): void {
+        switch(c){
+            case 10:
+                FullLED_Value = 80
+                break;
+            case 1:
+                FullLED_Value= 8
+            break;
+            case 2:
+                FullLED_Value= 4
+            break;
+            case 3:
+                FullLED_Value = 2
+            break;
+            case 4:
+                FullLED_Value = 12
+            break;
+            case 5:
+                FullLED_Value = 6
+            break;
+            case 6:
+                FullLED_Value = 10
+            break;
+            case 7:
+                FullLED_Value = 14
+            break;
+        }
         pins.digitalWritePin(DigitalPin.P15, 0)
         i = 1
         for (let index = 0; index < 8; index++) {
