@@ -37,6 +37,7 @@ let 黒: number[] = []
 custom.initialize()
 参考(黒)
 basic.forever(function () {
-    custom.フルカラーLED(1, 1, 1)
+    custom.フルカラーLED(1, 0, 1)
+    _74HC4094(142 * 256)
     basic.pause(1000)
 })
