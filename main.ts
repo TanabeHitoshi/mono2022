@@ -15,23 +15,10 @@ function clk () {
     pins.digitalWritePin(DigitalPin.P13, 1)
     basic.pause(1)
 }
-function フルカラーLED (数値: number, 数値2: number, 数値3: number) {
-    FullLED_Value = 数値 * 8 + (数値2 * 2 + 数値3 * 4)
-    pins.digitalWritePin(DigitalPin.P15, 0)
-    i = 1
-    for (let index = 0; index < 8; index++) {
-        tmp = Math.trunc(FullLED_Value / i)
-        pins.digitalWritePin(DigitalPin.P14, tmp % 2)
-        clk()
-        i = i * 2
-    }
-    pins.digitalWritePin(DigitalPin.P15, 1)
-}
-let FullLED_Value = 0
 let tmp = 0
 let i = 0
 custom.initialize()
+// custom.セグメントＬＥＤ(LED_view.e, LED_view.black)
 basic.forever(function () {
-    custom.フルカラーLED(color_type.yellow)
-    custom._7SEG(LED_view.minus, LED_view.Low)
+    custom.セグメントＬＥＤ(LED_view.a, LED_view.Hi)
 })

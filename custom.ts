@@ -65,6 +65,8 @@ enum LED_view {
 
 }
 let led_value:number
+let FullLED_Value:number
+
 /**
  * Custom blocks
  */
@@ -131,6 +133,13 @@ namespace custom {
      * @param value describe value here, eg: 5
      */
     //% block
+    export function clk(): void {
+        pins.digitalWritePin(DigitalPin.P13, 0)
+        basic.pause(1)
+        pins.digitalWritePin(DigitalPin.P13, 1)
+        basic.pause(1)
+    }
+    //% block
     export function _74HC595(value:number): void {
         pins.digitalWritePin(DigitalPin.P16, 0)
         i = 1
@@ -144,7 +153,7 @@ namespace custom {
 
     }
     //% block
-    export function _7SEG(led_l: LED_view, led_r: LED_view): void {
+    export function セグメントＬＥＤ(led_l: LED_view, led_r: LED_view): void {
         switch(led_l){
             case LED_view.black:
                 led_value = 0
