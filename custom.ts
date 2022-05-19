@@ -117,9 +117,9 @@ namespace custom {
             break;
         }
         pins.digitalWritePin(DigitalPin.P15, 0)
-        i = 1
+        let i = 1
         for (let index = 0; index < 8; index++) {
-            tmp = Math.trunc(FullLED_Value / i)
+            let tmp = Math.trunc(FullLED_Value / i)
             pins.digitalWritePin(DigitalPin.P14, tmp % 2)
             clk()
             i = i * 2
@@ -142,9 +142,9 @@ namespace custom {
     //% block
     export function _74HC595(value:number): void {
         pins.digitalWritePin(DigitalPin.P16, 0)
-        i = 1
+        let i = 1
         for (let index = 0; index < 16; index++) {
-            tmp = Math.trunc(value / i)
+            let tmp = Math.trunc(value / i)
             pins.digitalWritePin(DigitalPin.P14, tmp % 2)
             clk()
             i = i * 2
@@ -152,6 +152,20 @@ namespace custom {
         pins.digitalWritePin(DigitalPin.P16, 1)
 
     }
+    //% block
+    export function モーター(value: number): void {
+        if(value==0){
+            pins.digitalWritePin(DigitalPin.P12, 0)
+            pins.digitalWritePin(DigitalPin.P8, 0)
+        }else if(value>0){
+            pins.digitalWritePin(DigitalPin.P8, 0)
+            pins.analogWritePin(AnalogPin.P12, value)
+        }else{
+            pins.digitalWritePin(DigitalPin.P12, 0)
+            pins.analogWritePin(AnalogPin.P8, Math.abs(value))
+        }
+    }
+
     //% block
     export function セグメントＬＥＤ(led_l: LED_view, led_r: LED_view): void {
         switch(led_l){
