@@ -157,7 +157,7 @@ namespace custom {
      * TODO: describe your function here
      * @param value describe value here, eg: 5
      */
-    //% block
+    //%  block
     export function clk(): void {
         pins.digitalWritePin(DigitalPin.P13, 0)
         basic.pause(1)
