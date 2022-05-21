@@ -66,6 +66,16 @@ enum LED_view {
     f
 
 }
+enum io {
+    //% block="デジタル０１"
+    digital01,
+    //% block="デジタル０２"
+    digital02,
+    //% block="アナログ０３"
+    analog03,
+    //% block="アナログ０４"
+    analog04,
+}
 let led_value:number
 let FullLED_Value:number
 let seg_l:number
@@ -90,6 +100,24 @@ namespace custom {
         pins.setPull(DigitalPin.P6, PinPullMode.PullNone)
         pins.setPull(DigitalPin.P7, PinPullMode.PullNone)
         pins.setPull(DigitalPin.P9, PinPullMode.PullNone)
+    }
+    //% block
+    export function 入力(i:io):any {
+        switch(i){
+            case io.digital01:
+                return pins.digitalReadPin(DigitalPin.P7)
+            break;
+            case io.digital02:
+                return pins.digitalReadPin(DigitalPin.P6)
+            break;
+            case io.analog03:
+                return pins.analogReadPin(AnalogPin.P4)
+            break;
+            case io.analog04:
+                return pins.analogReadPin(AnalogPin.P3)
+                break;
+        }
+        
     }
     //% block
     export function デジタル１(): any {
