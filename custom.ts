@@ -117,25 +117,7 @@ namespace custom {
                 return pins.analogReadPin(AnalogPin.P3)
                 break;
         }
-        
     }
-    //% block
-    export function デジタル１(): any {
-        return pins.digitalReadPin(DigitalPin.P7)
-    }
-    //% block
-    export function デジタル２(): any {
-        return pins.digitalReadPin(DigitalPin.P6)
-    }
-    //% block
-    export function アナログ１(): any {
-        return pins.analogReadPin(AnalogPin.P4)
-    }
-    //% block
-    export function アナログ２(): any {
-        return pins.analogReadPin(AnalogPin.P3)
-    }
-
     //% block
     export function フルカラーLED(c:color_type): void {
         switch(c){
@@ -196,7 +178,7 @@ namespace custom {
         pins.digitalWritePin(DigitalPin.P13, 1)
         basic.pause(1)
     }
-    //% block
+    //%
     export function _74HC595(value:number): void {
         pins.digitalWritePin(DigitalPin.P16, 0)
         let i = 1
