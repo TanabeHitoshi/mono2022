@@ -212,18 +212,19 @@ namespace custom {
             }
             
 		}
-    }        //% block
+    }        
+    //% block
     export function ステッピングモータ角度(deg: number): void {
         let value
-        let d
+        let n
         if (deg > 0) {
             value = 128
-            d = 1
+            n = deg / 1.25
         } else {
             value = 16
-            d = -1
+            n = -deg / 1.25
         }
-        let n = deg / 3
+
         let i = 1
         for (let j = 0; j < n; j++) {
             pins.digitalWritePin(DigitalPin.P15, 0)
@@ -235,7 +236,7 @@ namespace custom {
             }
             pins.digitalWritePin(DigitalPin.P15, 1)
             i = 1
-            if (d == 1) {
+            if (deg > 0) {
                 value /= 2
                 if (value < 16) {
                     value = 128
