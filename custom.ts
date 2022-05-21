@@ -76,6 +76,20 @@ enum io {
     //% block="アナログ０４"
     analog04,
 }
+enum step_speed {
+    //% block="遅い"
+    low,
+    //% block="普通"
+    mid,
+    //% block="速い"
+    hi
+}
+enum step_dir {
+    //% block="正転"
+    cw,
+    //% block="逆転"
+    ccw
+}
 let led_value:number
 let FullLED_Value:number
 let seg_l:number
@@ -158,21 +172,37 @@ namespace custom {
 
     }
     //% block
-    export function ステッピングモータ(): void {
-		let value = 16
+    export function ステッピングモータ(s:step_speed,d:step_dir): void {
+		let value
+        if(d==step_dir.cw){
+            value = 128
+        }else{
+            value = 16
+        }
         let i = 1
 		for(let j=0;j<4;j++){
-        pins.digitalWritePin(DigitalPin.P15, 0)
+           pins.digitalWritePin(DigitalPin.P15, 0)
 	        for (let index = 0; index < 8; index++) {
 	            let tmp = Math.trunc(value / i)
 	            pins.digitalWritePin(DigitalPin.P14, tmp % 2)
 	            clk()
 	            i = i * 2
 	        }
-        pins.digitalWritePin(DigitalPin.P15, 1)
-		i=1
-		value *=2
- //           basic.pause(0)
+            pins.digitalWritePin(DigitalPin.P15, 1)
+            i=1
+            if (d == step_dir.cw) {
+                value /= 2
+            } else {
+                value *= 2
+            }            
+            if(s==step_speed.low){
+                basic.pause(200)
+            } else if (s == step_speed.mid){
+                basic.pause(100)
+            }else{
+                basic.pause(0)
+            }
+            
 		}
     }
     //% block

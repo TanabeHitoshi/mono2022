@@ -1,5 +1,4 @@
 custom.initialize()
-// custom.セグメントＬＥＤ(LED_view.e, LED_view.black)
 basic.forever(function () {
-    custom.ステッピングモータ()
+    custom.ステッピングモータ(step_speed.low, step_dir.ccw)
 })
