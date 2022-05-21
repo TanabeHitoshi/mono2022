@@ -24,6 +24,8 @@ enum color_type {
 enum LED_view {
     //% block="消灯"
     black,
+    //% block="そのまま"
+    pre,
     //% block="H"
     Hi,
     //% block="L"
@@ -66,6 +68,8 @@ enum LED_view {
 }
 let led_value:number
 let FullLED_Value:number
+let seg_l:number
+let seg_r: number
 
 /**
  * Custom blocks
@@ -157,7 +161,7 @@ namespace custom {
      * TODO: describe your function here
      * @param value describe value here, eg: 5
      */
-    //%  block
+    //%
     export function clk(): void {
         pins.digitalWritePin(DigitalPin.P13, 0)
         basic.pause(1)
@@ -193,6 +197,17 @@ namespace custom {
 
     //% block
     export function セグメントＬＥＤ(led_l: LED_view, led_r: LED_view): void {
+        if(led_l ==LED_view.pre){
+            led_l = seg_l
+        }else{
+            seg_l = led_l
+        }
+        if (led_r == LED_view.pre) {
+            led_r = seg_r
+        }else{
+            seg_r = led_r
+        }
+
         switch(led_l){
             case LED_view.black:
                 led_value = 0
@@ -258,7 +273,7 @@ namespace custom {
         switch (led_r) {
             case LED_view.black:
                 led_value += 0 * 256
-                break;
+            break;
             case LED_view.Hi:
                 led_value += 110*256
                 break;
