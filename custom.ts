@@ -90,6 +90,14 @@ enum step_dir {
     //% block="逆転"
     ccw
 }
+enum tone {
+    //% block="低音"
+    low,
+    //% block="中音"
+    mid,
+    //% block="高音"
+    hi
+}
 let led_value:number
 let FullLED_Value:number
 let seg_l:number
@@ -204,7 +212,59 @@ namespace custom {
             }
             
 		}
+    }        //% block
+    export function ステッピングモータ角度(deg: number): void {
+        let value
+        let d
+        if (deg > 0) {
+            value = 128
+            d = 1
+        } else {
+            value = 16
+            d = -1
+        }
+        let n = deg / 3
+        let i = 1
+        for (let j = 0; j < n; j++) {
+            pins.digitalWritePin(DigitalPin.P15, 0)
+            for (let index = 0; index < 8; index++) {
+                let tmp = Math.trunc(value / i)
+                pins.digitalWritePin(DigitalPin.P14, tmp % 2)
+                clk()
+                i = i * 2
+            }
+            pins.digitalWritePin(DigitalPin.P15, 1)
+            i = 1
+            if (d == 1) {
+                value /= 2
+                if (value < 16) {
+                    value = 128
+                }
+            } else {
+                value *= 2
+                if (value > 128) {
+                    value = 16
+                }
+            }
+
+        }
     }
+
+    //% block
+    export function 音(m: tone): void {
+        switch (m) {
+            case tone.hi:
+                music.ringTone(698)
+                break;
+            case tone.mid:
+                music.ringTone(349)
+                break;
+            case tone.low:
+                music.ringTone(175)
+                break;
+        }
+    }
+
     //% block
     export function モニタ(): void {
         serial.writeNumbers([
