@@ -158,6 +158,24 @@ namespace custom {
 
     }
     //% block
+    export function ステッピングモータ(): void {
+		let value = 16
+        let i = 1
+		for(let j=0;j<4;j++){
+        pins.digitalWritePin(DigitalPin.P15, 0)
+	        for (let index = 0; index < 8; index++) {
+	            let tmp = Math.trunc(value / i)
+	            pins.digitalWritePin(DigitalPin.P14, tmp % 2)
+	            clk()
+	            i = i * 2
+	        }
+        pins.digitalWritePin(DigitalPin.P15, 1)
+		i=1
+		value *=2
+ //           basic.pause(0)
+		}
+    }
+    //% block
     export function モニタ(): void {
         serial.writeNumbers([
             pins.analogReadPin(AnalogPin.P3),
