@@ -99,7 +99,7 @@ enum tone {
     hi
 }
 let pre_led_value:number
-let FullLED_Value:number
+let pre_FullLED_Value: number
 let Step:number
 let FullStep:number
 let seg_l:number
@@ -146,6 +146,7 @@ namespace custom {
     }
     //% block
     export function フルカラーLED(c:color_type): void {
+        let FullLED_Value
         switch(c){
             case color_type.black:
                 FullLED_Value = 0
@@ -172,19 +173,19 @@ namespace custom {
                 FullLED_Value = 14
                 break; 
         }
-        serial.writeValue("f", FullLED_Value)
-        serial.writeValue("s", Step)
-        FullStep = FullLED_Value + Step
-        pins.digitalWritePin(DigitalPin.P15, 0)
-        let i = 1
-        for (let index = 0; index < 8; index++) {
-            let tmp = Math.trunc(FullStep / i)
-            pins.digitalWritePin(DigitalPin.P14, tmp % 2)
-            clk()
-            i = i * 2
+//        FullStep = FullLED_Value + Step
+        if(FullLED_Value != pre_FullLED_Value){
+            pins.digitalWritePin(DigitalPin.P15, 0)
+            let i = 1
+            for (let index = 0; index < 8; index++) {
+                let tmp = Math.trunc(FullLED_Value / i)
+                pins.digitalWritePin(DigitalPin.P14, tmp % 2)
+                clk()
+                i = i * 2
+            }
+            pins.digitalWritePin(DigitalPin.P15, 1)
         }
-        pins.digitalWritePin(DigitalPin.P15, 1)
-
+        pre_FullLED_Value = FullLED_Value
     }
     //% block
     export function ステッピングモータ(s:step_speed,d:step_dir): void {
@@ -196,9 +197,7 @@ namespace custom {
         }
         let i = 1
 		for(let j=0;j<4;j++){
-            serial.writeValue("f", FullLED_Value)
-            serial.writeValue("s", Step)
-            FullStep = FullLED_Value + Step
+           FullStep = pre_FullLED_Value + Step
             
            pins.digitalWritePin(DigitalPin.P15, 0)
 	        for (let index = 0; index < 8; index++) {
