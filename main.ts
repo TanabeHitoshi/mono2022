@@ -7,10 +7,10 @@ basic.forever(function () {
     }
     if (custom.入力(io.digital01) == 0) {
         custom.セグメントＬＥＤ(LED_view.pre, LED_view.Hi)
-        custom.ステッピングモータ(step_speed.hi, step_dir.cw)
-        custom.フルカラーLED(color_type.green)
+        custom.ステッピングモータ(step_speed.hi, step_dir.ccw)
+        custom.フルカラーLED(color_type.white)
     } else {
         custom.セグメントＬＥＤ(LED_view.pre, LED_view.Low)
-        custom.フルカラーLED(color_type.yellow)
+        custom.フルカラーLED(color_type.magenta)
     }
 })

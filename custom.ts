@@ -100,6 +100,8 @@ enum tone {
 }
 let pre_led_value:number
 let FullLED_Value:number
+let Step:number
+let FullStep:number
 let seg_l:number
 let seg_r: number
 
@@ -122,6 +124,8 @@ namespace custom {
         pins.setPull(DigitalPin.P6, PinPullMode.PullNone)
         pins.setPull(DigitalPin.P7, PinPullMode.PullNone)
         pins.setPull(DigitalPin.P9, PinPullMode.PullNone)
+        FullStep = 0
+        Step = 0
     }
     //% block
     export function 入力(i:io):any {
@@ -166,12 +170,15 @@ namespace custom {
             break;
             case color_type.white:
                 FullLED_Value = 14
-            break;
+                break; 
         }
+        serial.writeValue("f", FullLED_Value)
+        serial.writeValue("s", Step)
+        FullStep = FullLED_Value + Step
         pins.digitalWritePin(DigitalPin.P15, 0)
         let i = 1
         for (let index = 0; index < 8; index++) {
-            let tmp = Math.trunc(FullLED_Value / i)
+            let tmp = Math.trunc(FullStep / i)
             pins.digitalWritePin(DigitalPin.P14, tmp % 2)
             clk()
             i = i * 2
@@ -183,26 +190,37 @@ namespace custom {
     export function ステッピングモータ(s:step_speed,d:step_dir): void {
 		let value
         if(d==step_dir.cw){
-            value = 128
+            Step = 128
         }else{
-            value = 16
+            Step = 16
         }
         let i = 1
 		for(let j=0;j<4;j++){
+            serial.writeValue("f", FullLED_Value)
+            serial.writeValue("s", Step)
+            FullStep = FullLED_Value + Step
+            
            pins.digitalWritePin(DigitalPin.P15, 0)
 	        for (let index = 0; index < 8; index++) {
-	            let tmp = Math.trunc(value / i)
+                let tmp = Math.trunc(FullStep / i)
 	            pins.digitalWritePin(DigitalPin.P14, tmp % 2)
 	            clk()
 	            i = i * 2
 	        }
             pins.digitalWritePin(DigitalPin.P15, 1)
+
             i=1
             if (d == step_dir.cw) {
-                value /= 2
+                Step /= 2
+                if(Step < 16){
+                    Step = 0
+                }
             } else {
-                value *= 2
-            }            
+                Step *= 2
+                if (Step > 256) {
+                    Step = 0
+                }
+            }
             if(s==step_speed.low){
                 basic.pause(200)
             } else if (s == step_speed.mid){
