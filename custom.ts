@@ -98,7 +98,7 @@ enum tone {
     //% block="高音"
     hi
 }
-let led_value:number
+let pre_led_value:number
 let FullLED_Value:number
 let seg_l:number
 let seg_r: number
@@ -316,6 +316,7 @@ namespace custom {
 
     //% block
     export function セグメントＬＥＤ(led_l: LED_view, led_r: LED_view): void {
+        let led_value
         if(led_l ==LED_view.pre){
             led_l = seg_l
         }else{
@@ -451,7 +452,10 @@ namespace custom {
                 led_value += 142 * 256
                 break;
         }
-        _74HC595(led_value)
+        if(led_value != pre_led_value){
+            _74HC595(led_value)
+        }
+        pre_led_value = led_value
     }
 
 }
