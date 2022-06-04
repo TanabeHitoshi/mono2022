@@ -96,7 +96,9 @@ enum tone {
     //% block="中音"
     mid,
     //% block="高音"
-    hi
+    hi,
+    //% block="無音"
+    no
 }
 let pre_led_value:number
 let pre_FullLED_Value: number
@@ -124,6 +126,9 @@ namespace custom {
         pins.setPull(DigitalPin.P6, PinPullMode.PullNone)
         pins.setPull(DigitalPin.P7, PinPullMode.PullNone)
         pins.setPull(DigitalPin.P9, PinPullMode.PullNone)
+        フルカラーLED(color_type.black)
+        セグメントＬＥＤ(LED_view.black, LED_view.black)
+        モーター(0)
         FullStep = 0
         Step = 0
     }
@@ -272,15 +277,22 @@ namespace custom {
     export function 音(m: tone): void {
         switch (m) {
             case tone.hi:
+                pins.analogSetPitchPin(AnalogPin.P0)
                 music.ringTone(698)
                 break;
             case tone.mid:
+                pins.analogSetPitchPin(AnalogPin.P0)
                 music.ringTone(349)
                 break;
             case tone.low:
+                pins.analogSetPitchPin(AnalogPin.P0)
                 music.ringTone(175)
                 break;
-        }
+            case tone.no:
+                music.stopAllSounds()
+                pins.setAudioPin(AnalogPin.P10)
+                break;
+         }
     }
 
     //% block
@@ -418,7 +430,7 @@ namespace custom {
                 led_value += 28 * 256
                 break;
             case LED_view.minus:
-                led_value += 2
+                led_value += 2*256
                 break;
              case LED_view.zero:
                 led_value += 252 * 256
