@@ -76,6 +76,16 @@ enum io {
     //% block="アナログ０４"
     analog04,
 }
+enum out {
+    //% block="ON"
+    ON,
+    //% block="OFF"
+    OFF,
+    //% block="上"
+    UP,
+    //% block="下"
+    DOWN,
+}
 enum step_speed {
     //% block="遅い"
     low,
@@ -147,6 +157,23 @@ namespace custom {
             break;
             case io.analog04:
                 return pins.analogReadPin(AnalogPin.P3)
+                break;
+        }
+    }
+    //% block
+    export function 出力(i: out): any {
+        switch (i) {
+            case out.ON:
+                return 0
+                break;
+            case out.OFF:
+                return 1
+                break;
+            case out.UP:
+                return 0
+                break;
+            case out.DOWN:
+                return 1
                 break;
         }
     }
