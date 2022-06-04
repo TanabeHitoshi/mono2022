@@ -100,7 +100,8 @@ enum tone {
     //% block="無音"
     no
 }
-let pre_led_value:number
+let pre_led_value: number
+let pre_numeric:number
 let pre_FullLED_Value: number
 let Step:number
 let FullStep:number
@@ -486,5 +487,80 @@ namespace custom {
         }
         pre_led_value = led_value
     }
+    //% block
+    export function セグメント数値(numeric: number): void {
+        let led_value
+        let led_l = Math.floor(numeric / 10)
+  
+        switch (led_l) {
+            case 0:
+                led_value = 0
+                break;
+            case 1:
+                led_value = 96
+                break;
+            case 2:
+                led_value = 218
+                break;
+            case 3:
+                led_value = 242
+                break;
+            case 4:
+                led_value = 102
+                break;
+            case 5:
+                led_value = 182
+                break;
+            case 6:
+                led_value = 190
+                break;
+            case 7:
+                led_value = 228
+                break;
+            case 8:
+                led_value = 254
+                break;
+            case 9:
+                led_value = 246
+                break;
+        }
+        let led_r = numeric % 10
+         switch (led_r) {
+            case 0:
+                led_value += 252 * 256
+                break;
+            case 1:
+                led_value += 96 * 256
+                break;
+            case 2:
+                led_value += 218 * 256
+                break;
+            case 3:
+                led_value += 242 * 256
+                break;
+            case 4:
+                led_value += 102 * 256
+                break;
+            case 5:
+                led_value += 182 * 256
+                break;
+            case 6:
+                led_value += 190 * 256
+                break;
+            case 7:
+                led_value += 228 * 256
+                break;
+            case 8:
+                led_value += 254 * 256
+                break;
+            case 9:
+                led_value += 246 * 256
+                break;
+        }
+        if (numeric != pre_numeric) {
+            _74HC595(led_value)
+        }
+        pre_numeric = numeric
 
+    }
 }
