@@ -384,7 +384,7 @@ namespace custom {
         }else{
             seg_r = led_r
         }
-//        serial.writeValue("pre", pre_led_value)
+
         switch(led_l){
             case LED_view.black:
                 led_value = 0
@@ -511,20 +511,14 @@ namespace custom {
         }
         if(led_value != pre_led_value){
             _74HC595(led_value)
-            pre_numeric = 100
         }
         pre_led_value = led_value
     }
     //% block
     export function セグメント数値(numeric: number): void {
         let led_value
-        if (numeric > 100){
-            numeric = 99
-        }
         let led_l = Math.floor(numeric / 10)
-
-//        serial.writeValue("pre", pre_led_value)
-
+  
         switch (led_l) {
             case 0:
                 led_value = 0
@@ -594,7 +588,6 @@ namespace custom {
             _74HC595(led_value)
         }
         pre_numeric = numeric
-        pre_led_value = led_value
 
     }
 }
