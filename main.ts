@@ -5,7 +5,6 @@ function 問題6 () {
     }
 }
 function 問題9 () {
-    パターン = 0
     while (true) {
     	
     }
@@ -15,53 +14,7 @@ function 問題1 () {
     	
     }
 }
-function 問題3 () {
-    while (true) {
-        if (custom.入力(io.digital02) == custom.出力(out.UP)) {
-            custom.音(tone.mid)
-        } else {
-            custom.音(tone.no)
-        }
-    }
-}
-function 問題7 () {
-    while (true) {
-    	
-    }
-}
-function 問題4 () {
-    while (true) {
-    	
-    }
-}
-function 問題8 () {
-    カウンタ = 0
-    while (true) {
-    	
-    }
-    while (true) {
-    	
-    }
-}
-function 問題2 () {
-    while (true) {
-        if (custom.入力(io.analog04) > 300) {
-            custom.セグメントＬＥＤ(LED_view.minus, LED_view.minus)
-        } else {
-            custom.セグメントＬＥＤ(LED_view.zero, LED_view.f)
-        }
-    }
-}
-function 問題5 () {
-    while (true) {
-    	
-    }
-}
-let パターン = 0
-let カウンタ = 0
-custom.initialize()
-let 問題 = 1
-basic.forever(function () {
+function 選択 () {
     if (問題 == 1) {
         問題1()
     }
@@ -89,4 +42,41 @@ basic.forever(function () {
     if (問題 == 9) {
         問題9()
     }
+}
+function 問題3 () {
+    while (true) {
+    	
+    }
+}
+function 問題7 () {
+    while (true) {
+    	
+    }
+}
+function 問題4 () {
+    while (true) {
+    	
+    }
+}
+function 問題8 () {
+    while (true) {
+    	
+    }
+}
+function 問題2 () {
+    while (true) {
+    	
+    }
+}
+function 問題5 () {
+    while (true) {
+    	
+    }
+}
+let カウンタ = 0
+let 問題 = 0
+custom.initialize()
+問題 = 1
+basic.forever(function () {
+    選択()
 })
