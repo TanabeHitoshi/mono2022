@@ -3,6 +3,9 @@ function 問題6 () {
     while (true) {
         if (custom.入力(io.digital02) == custom.出力(out.UP)) {
             custom.セグメント数値(カウンタ)
+        } else {
+            custom.セグメントＬＥＤ(LED_view.black, LED_view.black)
+            カウンタ = 0
         }
         if (custom.入力(io.digital01) == custom.出力(out.ON)) {
             カウンタ += 1
@@ -12,9 +15,9 @@ function 問題6 () {
 }
 function 問題9 () {
     パターン = 0
+    カウンタ = 0
     while (true) {
         if (custom.入力(io.analog04) > 300) {
-            カウンタ = 0
             パターン = 10
         } else {
             パターン = 0
@@ -22,36 +25,39 @@ function 問題9 () {
         if (パターン == 0) {
             custom.セグメントＬＥＤ(LED_view.black, LED_view.black)
             custom.フルカラーLED(color_type.black)
+            カウンタ = 0
         }
         if (パターン == 10) {
             カウンタ += 1
-            custom.セグメント数値(カウンタ)
-            basic.pause(500)
-            if (カウンタ > 3) {
+            if (カウンタ >= 4) {
                 カウンタ = 1
             }
+            custom.セグメント数値(カウンタ)
+            basic.pause(500)
             if (custom.入力(io.digital01) == custom.出力(out.ON)) {
-                カウンタ = 20
+                パターン = 20
             }
         }
         if (パターン == 20) {
-            if (カウンタ == 1) {
-                custom.フルカラーLED(color_type.red)
-                basic.pause(200)
-                custom.フルカラーLED(color_type.black)
-                basic.pause(200)
-            }
-            if (カウンタ == 2) {
-                custom.フルカラーLED(color_type.blue)
-                basic.pause(200)
-                custom.フルカラーLED(color_type.black)
-                basic.pause(200)
-            }
-            if (カウンタ == 3) {
-                custom.フルカラーLED(color_type.green)
-                basic.pause(200)
-                custom.フルカラーLED(color_type.black)
-                basic.pause(200)
+            while (custom.入力(io.digital01) == custom.出力(out.ON)) {
+                if (カウンタ == 1) {
+                    custom.フルカラーLED(color_type.red)
+                    basic.pause(200)
+                    custom.フルカラーLED(color_type.black)
+                    basic.pause(200)
+                }
+                if (カウンタ == 2) {
+                    custom.フルカラーLED(color_type.blue)
+                    basic.pause(200)
+                    custom.フルカラーLED(color_type.black)
+                    basic.pause(200)
+                }
+                if (カウンタ == 3) {
+                    custom.フルカラーLED(color_type.green)
+                    basic.pause(200)
+                    custom.フルカラーLED(color_type.black)
+                    basic.pause(200)
+                }
             }
         }
     }
@@ -155,18 +161,19 @@ function 問題8 () {
                 custom.ステッピングモータ角度(-180)
             }
             if (カウンタ == 4) {
-                custom.ステッピングモータ角度(-270)
+                custom.ステッピングモータ角度(90)
             }
             custom.音(tone.mid)
             basic.pause(1000)
             custom.音(tone.no)
+            custom.セグメントＬＥＤ(LED_view.black, LED_view.black)
             break;
         }
     }
 }
 function 問題2 () {
     while (true) {
-        if (custom.入力(io.analog04) > 300) {
+        if (custom.入力(io.analog04) < 300) {
             custom.セグメントＬＥＤ(LED_view.minus, LED_view.minus)
         } else {
             custom.セグメントＬＥＤ(LED_view.zero, LED_view.f)
@@ -190,7 +197,7 @@ function 問題5 () {
 let パターン = 0
 let カウンタ = 0
 custom.initialize()
-let 問題 = 1
+let 問題 = 9
 basic.forever(function () {
     if (問題 == 1) {
         問題1()
