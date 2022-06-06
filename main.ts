@@ -197,7 +197,7 @@ function 問題5 () {
 let パターン = 0
 let カウンタ = 0
 custom.initialize()
-let 問題 = 9
+let 問題 = 6
 basic.forever(function () {
     if (問題 == 1) {
         問題1()
