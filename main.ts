@@ -1,3 +1,6 @@
+function 入力 () {
+    return pins.analogReadPin(AnalogPin.P3)
+}
 function 問題6 () {
     カウンタ = 0
     while (true) {
