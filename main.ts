@@ -20,5 +20,5 @@ let アナログ０３ = 3
 let アナログ０４ = 4
 let num = [0]
 basic.forever(function () {
-	
+    custom.フルカラーLED(color_type.cyan)
 })

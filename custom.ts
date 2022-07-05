@@ -209,7 +209,7 @@ namespace custom {
         pre_FullLED_Value = FullLED_Value
     }
     //% block
-    export function ステッピングモータ(s:step_speed,d:step_dir): void {
+    export function led_stepmotor(s:step_speed,d:step_dir): void {
 		let value
         if(d==step_dir.cw){
             Step = 128
