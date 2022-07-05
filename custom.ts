@@ -345,7 +345,7 @@ namespace custom {
         basic.pause(1)
     }
     //%
-    export function _74HC595(value:number): void {
+    export function serial_init(value:number): void {
         pins.digitalWritePin(DigitalPin.P16, 0)
         let i = 1
         for (let index = 0; index < 16; index++) {
@@ -510,7 +510,7 @@ namespace custom {
                 break;
         }
         if(led_value != pre_led_value){
-            _74HC595(led_value)
+            serial_init(led_value)
             pre_numeric = 100
         }
         pre_led_value = led_value
@@ -591,7 +591,7 @@ namespace custom {
                 break;
         }
         if (numeric != pre_numeric) {
-            _74HC595(led_value)
+            serial_init(led_value)
         }
         pre_numeric = numeric
         pre_led_value = led_value

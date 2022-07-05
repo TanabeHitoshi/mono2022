@@ -19,5 +19,5 @@ let デジタル０２ = 2
 let アナログ０３ = 3
 let アナログ０４ = 4
 basic.forever(function () {
-	
+    custom.セグメントＬＥＤ(LED_view.Hi, LED_view.Low)
 })
