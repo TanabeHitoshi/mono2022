@@ -195,7 +195,13 @@ namespace custom {
             for (let index = 0; index < 8; index++) {
                 let tmp = Math.trunc(FullLED_Value / i)
                 pins.digitalWritePin(DigitalPin.P14, tmp % 2)
-                clk()
+
+                //クロック発振
+                pins.digitalWritePin(DigitalPin.P13, 0)
+                basic.pause(1)
+                pins.digitalWritePin(DigitalPin.P13, 1)
+                basic.pause(1)
+
                 i = i * 2
             }
             pins.digitalWritePin(DigitalPin.P15, 1)
@@ -218,7 +224,13 @@ namespace custom {
 	        for (let index = 0; index < 8; index++) {
                 let tmp = Math.trunc(FullStep / i)
 	            pins.digitalWritePin(DigitalPin.P14, tmp % 2)
-	            clk()
+
+                //クロック発振
+                pins.digitalWritePin(DigitalPin.P13, 0)
+                basic.pause(1)
+                pins.digitalWritePin(DigitalPin.P13, 1)
+                basic.pause(1)
+
 	            i = i * 2
 	        }
             pins.digitalWritePin(DigitalPin.P15, 1)
@@ -263,7 +275,13 @@ namespace custom {
             for (let index = 0; index < 8; index++) {
                 let tmp = Math.trunc(value / i)
                 pins.digitalWritePin(DigitalPin.P14, tmp % 2)
-                clk()
+
+                //クロック発振
+                pins.digitalWritePin(DigitalPin.P13, 0)
+                basic.pause(1)
+                pins.digitalWritePin(DigitalPin.P13, 1)
+                basic.pause(1)
+
                 i = i * 2
             }
             pins.digitalWritePin(DigitalPin.P15, 1)
@@ -320,13 +338,7 @@ namespace custom {
      * @param value describe value here, eg: 5
      */
     //%
-    export function clk(): void {
-        pins.digitalWritePin(DigitalPin.P13, 0)
-        basic.pause(1)
-        pins.digitalWritePin(DigitalPin.P13, 1)
-        basic.pause(1)
-    }
-    //%
+
     export function serial_init(value:number): void {
         pins.digitalWritePin(DigitalPin.P16, 0)
         let i = 1
