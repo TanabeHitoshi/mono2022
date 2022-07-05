@@ -26,12 +26,6 @@ enum LED_view {
     black,
     //% block="そのまま"
     pre,
-    //% block="H"
-    Hi,
-    //% block="L"
-    Low,
-    //% block="-"
-    minus,
     //% block="0"
     zero,
     //% block="1"
@@ -52,19 +46,7 @@ enum LED_view {
     eight,
     //% block="9"
     nine,
-    //% block="A"
-    a,
-    //% block="b"
-    b,
-    //% block="c"
-    c,
-    //% block="d"
-    d,
-    //% block="E"
-    e,
-    //% block="F"
-    f
-
+ 
 }
 enum io {
     //% block="デジタル０１"
@@ -138,7 +120,7 @@ namespace custom {
         pins.setPull(DigitalPin.P7, PinPullMode.PullNone)
         pins.setPull(DigitalPin.P9, PinPullMode.PullNone)
         フルカラーLED(color_type.black)
-        セグメントＬＥＤ(LED_view.black, LED_view.black)
+ //       セグメントＬＥＤ(LED_view.black, LED_view.black)
         モーター(0)
         FullStep = 0
         Step = 0
@@ -376,7 +358,7 @@ namespace custom {
     }
 
     //% block
-    export function セグメントＬＥＤ(led_l: LED_view, led_r: LED_view): void {
+    export function disp(led_l: LED_view, led_r: LED_view): void {
         let led_value
         if(led_l ==LED_view.pre){
             led_l = seg_l
@@ -392,15 +374,6 @@ namespace custom {
         switch(led_l){
             case LED_view.black:
                 led_value = 0
-            break;
-            case LED_view.Hi:
-                led_value = 110
-            break;
-            case LED_view.Low:
-                led_value = 28
-            break;
-            case LED_view.minus:
-                led_value = 2
             break;
             case LED_view.zero:
                 led_value = 252
@@ -432,38 +405,11 @@ namespace custom {
             case LED_view.nine:
                 led_value = 246
             break; 
-            case LED_view.a:
-                led_value = 238
-            break; 
-            case LED_view.b:
-                led_value = 62
-            break; 
-            case LED_view.c:
-                led_value = 26
-            break; 
-            case LED_view.d:
-                led_value = 122
-            break; 
-            case LED_view.e:
-                led_value = 158
-            break; 
-            case LED_view.f:
-                led_value = 142
-            break;
         }
         switch (led_r) {
             case LED_view.black:
                 led_value += 0 * 256
             break;
-            case LED_view.Hi:
-                led_value += 110*256
-                break;
-            case LED_view.Low:
-                led_value += 28 * 256
-                break;
-            case LED_view.minus:
-                led_value += 2*256
-                break;
              case LED_view.zero:
                 led_value += 252 * 256
                 break;
@@ -493,24 +439,6 @@ namespace custom {
                 break;
             case LED_view.nine:
                 led_value += 246 * 256
-                break;
-            case LED_view.a:
-                led_value += 238 * 256
-                break;
-            case LED_view.b:
-                led_value += 62 * 256
-                break;
-            case LED_view.c:
-                led_value += 26 * 256
-                break;
-            case LED_view.d:
-                led_value += 122 * 256
-                break;
-            case LED_view.e:
-                led_value += 158 * 256
-                break;
-            case LED_view.f:
-                led_value += 142 * 256
                 break;
         }
         if(led_value != pre_led_value){
