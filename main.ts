@@ -32,5 +32,5 @@ let num = [
 0
 ]
 basic.forever(function () {
-    custom.セグメントＬＥＤ(LED_view.Hi, LED_view.Low)
+	
 })
