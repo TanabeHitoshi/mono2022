@@ -209,7 +209,36 @@ namespace custom {
         pre_FullLED_Value = FullLED_Value
     }
     //% block
-    export function led_stepmotor(s: step_speed, d: step_dir): void {
+    export function led_stepmotor(c: color_type, s: step_speed, d: step_dir): void {
+        //フルカラーＬＥＤ
+        let FullLED_Value
+        switch (c) {
+            case color_type.black:
+                FullLED_Value = 0
+                break;
+            case color_type.red:
+                FullLED_Value = 8
+                break;
+            case color_type.blue:
+                FullLED_Value = 4
+                break;
+            case color_type.green:
+                FullLED_Value = 2
+                break;
+            case color_type.magenta:
+                FullLED_Value = 12
+                break;
+            case color_type.cyan:
+                FullLED_Value = 6
+                break;
+            case color_type.yellow:
+                FullLED_Value = 10
+                break;
+            case color_type.white:
+                FullLED_Value = 14
+                break;
+        }
+        //ステッピングモーター
         let value
         if (d == step_dir.cw) {
             Step = 128
@@ -218,7 +247,8 @@ namespace custom {
         }
         let i = 1
         for (let j = 0; j < 4; j++) {
-            FullStep = pre_FullLED_Value + Step
+//            FullStep = pre_FullLED_Value + Step
+            FullStep = FullLED_Value + Step
 
             pins.digitalWritePin(DigitalPin.P15, 0)
             for (let index = 0; index < 8; index++) {

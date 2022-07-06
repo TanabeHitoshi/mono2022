@@ -32,5 +32,5 @@ let num = [
 0
 ]
 basic.forever(function () {
-	
+    custom.led_stepmotor(color_type.yellow, step_speed.low, step_dir.cw)
 })
