@@ -1,6 +1,5 @@
 {
     "name": "mono2022",
-    "version": "0.0.4",
     "description": "",
     "dependencies": {
         "core": "*",
