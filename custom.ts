@@ -257,8 +257,7 @@ namespace custom {
         if (s > 0) {
             Step = 128           
         }else{
-            s = -s
-            Step = 16
+             Step = 16
         }
  
         let i = 1
@@ -295,10 +294,12 @@ namespace custom {
                         Step = 0
                     }
                 }
-            if(s != 0){
-                basic.pause(1000 / s)
-            }else{
+            if(s == 0){
                 basic.pause(0)
+            }else if(s > 0){
+                basic.pause(1000/s)
+            }else{
+                basic.pause(-1000 / s)
             }
           
         }
