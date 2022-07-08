@@ -205,11 +205,25 @@ namespace custom {
                 i = i * 2
             }
             pins.digitalWritePin(DigitalPin.P15, 1)
+            
+            for (let index = 0; index < 8; index++) {
+                pins.digitalWritePin(DigitalPin.P14, 0)
+                //クロック発振
+                pins.digitalWritePin(DigitalPin.P13, 0)
+                basic.pause(1)
+                pins.digitalWritePin(DigitalPin.P13, 1)
+                basic.pause(1)
+
+            }
+            pins.digitalWritePin(DigitalPin.P15, 1)
+
         }
         pre_FullLED_Value = FullLED_Value
+        pins.digitalWritePin(DigitalPin.P15, 1)
     }
     //% block
-    export function led_stepmotor(c: color_type, s: step_speed, d: step_dir): void {
+    export function led_stepmotor(c: color_type, s: number): void {
+//  export function led_stepmotor(c: color_type, s: step_speed, d: step_dir): void {
         //フルカラーＬＥＤ
         let FullLED_Value
         switch (c) {
@@ -240,51 +254,53 @@ namespace custom {
         }
         //ステッピングモーター
         let value
-        if (d == step_dir.cw) {
-            Step = 128
-        } else {
+        if (s > 0) {
+            Step = 128           
+        }else{
             Step = 16
         }
+ 
         let i = 1
         for (let j = 0; j < 4; j++) {
-//            FullStep = pre_FullLED_Value + Step
-            FullStep = FullLED_Value + Step
-
-            pins.digitalWritePin(DigitalPin.P15, 0)
-            for (let index = 0; index < 8; index++) {
-                let tmp = Math.trunc(FullStep / i)
-                pins.digitalWritePin(DigitalPin.P14, tmp % 2)
-
-                //クロック発振
-                pins.digitalWritePin(DigitalPin.P13, 0)
-                basic.pause(1)
-                pins.digitalWritePin(DigitalPin.P13, 1)
-                basic.pause(1)
-
-                i = i * 2
+            if(s == 0){
+                FullStep = FullLED_Value
+            }else{
+                FullStep = FullLED_Value + Step
             }
-            pins.digitalWritePin(DigitalPin.P15, 1)
+                pins.digitalWritePin(DigitalPin.P15, 0)
+                for (let index = 0; index < 8; index++) {
+                    let tmp = Math.trunc(FullStep / i)
+                    pins.digitalWritePin(DigitalPin.P14, tmp % 2)
 
-            i = 1
-            if (d == step_dir.cw) {
-                Step /= 2
-                if (Step < 16) {
-                    Step = 0
+                    //クロック発振
+                    pins.digitalWritePin(DigitalPin.P13, 0)
+                    basic.pause(1)
+                    pins.digitalWritePin(DigitalPin.P13, 1)
+                    basic.pause(1)
+
+                    i = i * 2
                 }
-            } else {
-                Step *= 2
-                if (Step > 256) {
-                    Step = 0
-                }
-            }
-            if (s == step_speed.low) {
-                basic.pause(200)
-            } else if (s == step_speed.mid) {
-                basic.pause(100)
-            } else {
-                basic.pause(0)
-            }
+                pins.digitalWritePin(DigitalPin.P15, 1)
 
+                i = 1
+                if (s > 0) {
+                    Step /= 2
+                    if (Step < 16) {
+                        Step = 0
+                    }
+                } else {
+                    Step *= 2
+                    if (Step > 256) {
+                        Step = 0
+                    }
+                }
+                if (s == step_speed.low) {
+                    basic.pause(200)
+                } else if (s == step_speed.mid) {
+                    basic.pause(100)
+                } else {
+                    basic.pause(0)
+                }
         }
     }
     //% block
