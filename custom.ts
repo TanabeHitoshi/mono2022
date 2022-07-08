@@ -257,6 +257,7 @@ namespace custom {
         if (s > 0) {
             Step = 128           
         }else{
+            s = -s
             Step = 16
         }
  
@@ -294,13 +295,12 @@ namespace custom {
                         Step = 0
                     }
                 }
-                if (s == step_speed.low) {
-                    basic.pause(200)
-                } else if (s == step_speed.mid) {
-                    basic.pause(100)
-                } else {
-                    basic.pause(0)
-                }
+            if(s != 0){
+                basic.pause(1000 / s)
+            }else{
+                basic.pause(0)
+            }
+          
         }
     }
     //% block
