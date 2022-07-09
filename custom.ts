@@ -112,7 +112,7 @@ namespace custom {
      * @param e describe parameter here
      */
     //% block="初期化"
-    export function initialize(): void {
+    export function config_ini(): void {
         // Add code here
         basic.clearScreen()
         led.enable(false)
@@ -126,21 +126,23 @@ namespace custom {
         Step = 0
     }
     //% block
-    export function 入力(i: io): any {
+    export function 入力(i: number): any {
         switch (i) {
-            case io.digital01:
+            case 1:
                 return pins.digitalReadPin(DigitalPin.P7)
                 break;
-            case io.digital02:
+            case 2:
                 return pins.digitalReadPin(DigitalPin.P6)
                 break;
-            case io.analog03:
+            case 3:
                 return pins.analogReadPin(AnalogPin.P4)
                 break;
-            case io.analog04:
+            case 4:
                 return pins.analogReadPin(AnalogPin.P3)
                 break;
-        }
+            case 5:
+                return pins.digitalReadPin(DigitalPin.P9)
+                break;       }
     }
     //% block
     export function 出力(i: out): any {
