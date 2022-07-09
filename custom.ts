@@ -262,6 +262,9 @@ namespace custom {
  
         let i = 1
         for (let j = 0; j < 4; j++) {
+            if(j == 1){
+//                FullLED_Value = 0
+            }
             if(s == 0){
                 FullStep = FullLED_Value
             }else{
@@ -286,16 +289,16 @@ namespace custom {
                 if (s > 0) {
                     Step /= 2
                     if (Step < 16) {
-                        Step = 0
+                        Step = 128
                     }
                 } else {
                     Step *= 2
-                    if (Step > 256) {
-                        Step = 0
+                    if (Step > 128) {
+                        Step = 16
                     }
                 }
             if(s == 0){
-                basic.pause(0)
+//                basic.pause(0)
             }else if(s > 0){
                 basic.pause(1000/s)
             }else{
