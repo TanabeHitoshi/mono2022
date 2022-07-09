@@ -14,19 +14,8 @@ let num = [
 228,
 254,
 246,
-0
+1
 ]
 basic.forever(function () {
-    custom.disp(num[0], num[1])
-    basic.pause(2000)
-    custom.disp(num[2], num[3])
-    basic.pause(2000)
-    custom.disp(num[4], num[5])
-    basic.pause(2000)
-    custom.disp(num[6], num[7])
-    basic.pause(2000)
-    custom.disp(num[8], num[9])
-    basic.pause(2000)
-    custom.disp(num[10], num[10])
-    basic.pause(2000)
+    custom.disp(2, num[0])
 })

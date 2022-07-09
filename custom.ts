@@ -440,18 +440,13 @@ namespace custom {
     //% block
     export function disp(led_l: number, led_r: number): void {
         let led_value
-        if (led_l == LED_view.pre) {
-            led_l = seg_l
-        } else {
-            seg_l = led_l
-        }
-        if (led_r == LED_view.pre) {
-            led_r = seg_r
-        } else {
-            seg_r = led_r
-        }
-        //        serial.writeValue("pre", pre_led_value)
+//        serial.writeValue("led_r", led_r)
+//        serial.writeValue("led_l", led_l)
         led_value = led_l + led_r * 256
+
+        //        serial.writeValue("pre", pre_led_value)
+//        led_value = led_l + led_r * 256
+//        serial.writeValue("led_value", led_value)
 //        led_value += led_r*256
         if (led_value != pre_led_value) {
             serial_init(led_value)
