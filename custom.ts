@@ -222,7 +222,7 @@ namespace custom {
         pins.digitalWritePin(DigitalPin.P15, 1)
     }
     //% block
-    export function led_stepmotor(c: color_type, s: number): void {
+    export function led_stepmotor(c: color_type, s: number,deg:number): void {
 //  export function led_stepmotor(c: color_type, s: step_speed, d: step_dir): void {
         //フルカラーＬＥＤ
         let FullLED_Value
@@ -254,14 +254,30 @@ namespace custom {
         }
         //ステッピングモーター
         let value
-        if (s > 0) {
-            Step = 128           
+        let n
+
+        if (deg > 0) {
+            Step = 128
+            n = deg / 1.25
+            if(s<0){
+                s=-s
+            }
+        } else if(deg < 0){
+            Step = 16
+            n = -deg / 1.25
+            if (s > 0) {
+                s = -s
+            }
         }else{
-             Step = 16
+            if (s > 0) {
+                Step = 128
+            } else {
+                Step = 16
+            }
+            n=4
         }
- 
         let i = 1
-        for (let j = 0; j < 4; j++) {
+        for (let j = 0; j < n; j++) {
             if(j == 1){
 //                FullLED_Value = 0
             }
