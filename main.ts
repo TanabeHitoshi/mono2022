@@ -17,5 +17,16 @@ let num = [
 0
 ]
 basic.forever(function () {
-    custom.disp(LED_view.zero, LED_view.four)
+    custom.disp(num[0], num[1])
+    basic.pause(2000)
+    custom.disp(num[2], num[3])
+    basic.pause(2000)
+    custom.disp(num[4], num[5])
+    basic.pause(2000)
+    custom.disp(num[6], num[7])
+    basic.pause(2000)
+    custom.disp(num[8], num[9])
+    basic.pause(2000)
+    custom.disp(num[10], num[10])
+    basic.pause(2000)
 })

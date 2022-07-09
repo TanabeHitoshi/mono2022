@@ -438,7 +438,7 @@ namespace custom {
     }
 
     //% block
-    export function disp(led_l: LED_view, led_r: LED_view): void {
+    export function disp(led_l: number, led_r: number): void {
         let led_value
         if (led_l == LED_view.pre) {
             led_l = seg_l
@@ -451,76 +451,8 @@ namespace custom {
             seg_r = led_r
         }
         //        serial.writeValue("pre", pre_led_value)
-        switch (led_l) {
-            case LED_view.black:
-                led_value = 0
-                break;
-            case LED_view.zero:
-                led_value = 252
-                break;
-            case LED_view.one:
-                led_value = 96
-                break;
-            case LED_view.two:
-                led_value = 218
-                break;
-            case LED_view.three:
-                led_value = 242
-                break;
-            case LED_view.four:
-                led_value = 102
-                break;
-            case LED_view.five:
-                led_value = 182
-                break;
-            case LED_view.six:
-                led_value = 190
-                break;
-            case LED_view.seven:
-                led_value = 228
-                break;
-            case LED_view.eight:
-                led_value = 254
-                break;
-            case LED_view.nine:
-                led_value = 246
-                break;
-        }
-        switch (led_r) {
-            case LED_view.black:
-                led_value += 0 * 256
-                break;
-            case LED_view.zero:
-                led_value += 252 * 256
-                break;
-            case LED_view.one:
-                led_value += 96 * 256
-                break;
-            case LED_view.two:
-                led_value += 218 * 256
-                break;
-            case LED_view.three:
-                led_value += 242 * 256
-                break;
-            case LED_view.four:
-                led_value += 102 * 256
-                break;
-            case LED_view.five:
-                led_value += 182 * 256
-                break;
-            case LED_view.six:
-                led_value += 190 * 256
-                break;
-            case LED_view.seven:
-                led_value += 228 * 256
-                break;
-            case LED_view.eight:
-                led_value += 254 * 256
-                break;
-            case LED_view.nine:
-                led_value += 246 * 256
-                break;
-        }
+        led_value = led_l + led_r * 256
+//        led_value += led_r*256
         if (led_value != pre_led_value) {
             serial_init(led_value)
             pre_numeric = 100
