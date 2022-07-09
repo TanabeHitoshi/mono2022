@@ -1,5 +1,5 @@
 custom.config_ini()
-let デジタル０１ = 1
+let デジタル０１ = 0
 let デジタル０２ = 2
 let アナログ０３ = 3
 let アナログ０４ = 4
@@ -17,5 +17,7 @@ let num = [
 1
 ]
 basic.forever(function () {
-    custom.disp(2, num[0])
+    custom.disp(デジタル０１, 0, 0)
+    デジタル０１ += 1
+    basic.pause(1000)
 })

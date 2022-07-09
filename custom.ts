@@ -21,33 +21,7 @@ enum color_type {
     //% block="白"
     white
 }
-enum LED_view {
-    //% block="消灯"
-    black,
-    //% block="そのまま"
-    pre,
-    //% block="0"
-    zero,
-    //% block="1"
-    one,
-    //% block="2"
-    two,
-    //% block="3"
-    three,
-    //% block="4"
-    four,
-    //% block="5"
-    five,
-    //% block="6"
-    six,
-    //% block="7"
-    seven,
-    //% block="8"
-    eight,
-    //% block="9"
-    nine,
 
-}
 enum io {
     //% block="デジタル０１"
     digital01,
@@ -438,11 +412,82 @@ namespace custom {
     }
 
     //% block
-    export function disp(led_l: number, led_r: number): void {
+    export function disp(numeric: number,led_l: number, led_r: number): void {
+
         let led_value
+        if (numeric > 100) {
+            numeric = 99
+        }
+        let numeric_l = Math.floor(numeric / 10)
+        switch (numeric_l) {
+            case 0:
+                led_value = 0
+                break;
+            case 1:
+                led_value = 96
+                break;
+            case 2:
+                led_value = 218
+                break;
+            case 3:
+                led_value = 242
+                break;
+            case 4:
+                led_value = 102
+                break;
+            case 5:
+                led_value = 182
+                break;
+            case 6:
+                led_value = 190
+                break;
+            case 7:
+                led_value = 228
+                break;
+            case 8:
+                led_value = 254
+                break;
+            case 9:
+                led_value = 246
+                break;
+        }
+        let numeric_r = numeric % 10
+        switch (numeric_r) {
+            case 0:
+                led_value += 252 * 256
+                break;
+            case 1:
+                led_value += 96 * 256
+                break;
+            case 2:
+                led_value += 218 * 256
+                break;
+            case 3:
+                led_value += 242 * 256
+                break;
+            case 4:
+                led_value += 102 * 256
+                break;
+            case 5:
+                led_value += 182 * 256
+                break;
+            case 6:
+                led_value += 190 * 256
+                break;
+            case 7:
+                led_value += 228 * 256
+                break;
+            case 8:
+                led_value += 254 * 256
+                break;
+            case 9:
+                led_value += 246 * 256
+                break;
+        }
+
 //        serial.writeValue("led_r", led_r)
 //        serial.writeValue("led_l", led_l)
-        led_value = led_l + led_r * 256
+//        led_value = led_l + led_r * 256
 
         //        serial.writeValue("pre", pre_led_value)
 //        led_value = led_l + led_r * 256
