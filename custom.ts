@@ -418,6 +418,9 @@ namespace custom {
         if (numeric > 100) {
             numeric = 99
         }
+        if(numeric < 0){
+            led_value = led_l + led_r * 256
+        }else{
         let numeric_l = Math.floor(numeric / 10)
         switch (numeric_l) {
             case 0:
@@ -484,15 +487,7 @@ namespace custom {
                 led_value += 246 * 256
                 break;
         }
-
-//        serial.writeValue("led_r", led_r)
-//        serial.writeValue("led_l", led_l)
-//        led_value = led_l + led_r * 256
-
-        //        serial.writeValue("pre", pre_led_value)
-//        led_value = led_l + led_r * 256
-//        serial.writeValue("led_value", led_value)
-//        led_value += led_r*256
+        }
         if (led_value != pre_led_value) {
             serial_init(led_value)
             pre_numeric = 100
@@ -502,12 +497,10 @@ namespace custom {
     //% block
     export function セグメント数値(numeric: number): void {
         let led_value
-        if (numeric > 100) {
+        if (numeric >= 100) {
             numeric = 99
         }
         let led_l = Math.floor(numeric / 10)
-
-        //        serial.writeValue("pre", pre_led_value)
 
         switch (led_l) {
             case 0:

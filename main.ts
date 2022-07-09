@@ -17,7 +17,5 @@ let num = [
 1
 ]
 basic.forever(function () {
-    custom.disp(デジタル０１, 0, 0)
-    デジタル０１ += 1
-    basic.pause(1000)
+    custom.disp(7, num[0], num[5])
 })
