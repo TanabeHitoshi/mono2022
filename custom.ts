@@ -199,8 +199,7 @@ namespace custom {
     }
     //% block
     export function led_stepmotor(c: color_type, s: number,deg:number): void {
-//  export function led_stepmotor(c: color_type, s: step_speed, d: step_dir): void {
-        //フルカラーＬＥＤ
+     //フルカラーＬＥＤ
         let FullLED_Value
         switch (c) {
             case color_type.black:
@@ -231,7 +230,6 @@ namespace custom {
         //ステッピングモーター
         let value
         let n
-
         if (deg > 0) {
             Step = 128
             n = deg / 1.25
@@ -299,50 +297,7 @@ namespace custom {
           
         }
     }
-    //% block
-    export function ステッピングモータ角度(deg: number): void {
-        let value
-        let n
-        if (deg > 0) {
-            value = 128
-            n = deg / 1.25
-        } else {
-            value = 16
-            n = -deg / 1.25
-        }
-
-        let i = 1
-        for (let j = 0; j < n; j++) {
-            pins.digitalWritePin(DigitalPin.P15, 0)
-            for (let index = 0; index < 8; index++) {
-                let tmp = Math.trunc(value / i)
-                pins.digitalWritePin(DigitalPin.P14, tmp % 2)
-
-                //クロック発振
-                pins.digitalWritePin(DigitalPin.P13, 0)
-                basic.pause(1)
-                pins.digitalWritePin(DigitalPin.P13, 1)
-                basic.pause(1)
-
-                i = i * 2
-            }
-            pins.digitalWritePin(DigitalPin.P15, 1)
-            i = 1
-            if (deg > 0) {
-                value /= 2
-                if (value < 16) {
-                    value = 128
-                }
-            } else {
-                value *= 2
-                if (value > 128) {
-                    value = 16
-                }
-            }
-
-        }
-    }
-
+ 
     //% block
     export function 音(m: tone): void {
         switch (m) {
