@@ -93,11 +93,17 @@ namespace custom {
         pins.setPull(DigitalPin.P6, PinPullMode.PullNone)
         pins.setPull(DigitalPin.P7, PinPullMode.PullNone)
         pins.setPull(DigitalPin.P9, PinPullMode.PullNone)
-        フルカラーLED(color_type.black)
-        //       セグメントＬＥＤ(LED_view.black, LED_view.black)
-        モーター(0)
-        FullStep = 0
-        Step = 0
+//        フルカラーLED(color_type.black)
+        serial.writeNumbers([
+            pins.digitalReadPin(DigitalPin.P9),
+            pins.analogReadPin(AnalogPin.P3),
+            pins.analogReadPin(AnalogPin.P4),
+            pins.digitalReadPin(DigitalPin.P6),
+            pins.digitalReadPin(DigitalPin.P7)
+        ])
+//        モーター(0)
+//        FullStep = 0
+//        Step = 0
     }
     //% block
     export function 入力(i: number): any {
