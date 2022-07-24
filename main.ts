@@ -19,12 +19,8 @@ let num = [
 246,
 0
 ]
+let カウント = 0
 basic.forever(function () {
-    if (pins.analogReadPin(AnalogPin.P3) >= 600) {
-        custom.led_stepmotor(color_type.black, pins.analogReadPin(AnalogPin.P3), 5)
-    } else if (pins.analogReadPin(AnalogPin.P3) <= 400) {
-        custom.led_stepmotor(color_type.black, 1000 - pins.analogReadPin(AnalogPin.P3), 5)
-    } else {
-        custom.led_stepmotor(color_type.black, 0, 0)
-    }
+    custom.led_stepmotor(7, 0, 0)
+    custom.led_stepmotor(0, 0, 0)
 })

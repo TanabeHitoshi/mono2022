@@ -3,69 +3,7 @@
 * このファイルを使って、独自の関数やブロックを定義してください。
 * 詳しくはこちらを参照してください：https://makecode.microbit.org/blocks/custom
 */
-enum color_type {
-    //% block="消灯"
-    black,
-    //% block="赤"
-    red,
-    //% block="青"
-    blue,
-    //% block="緑"
-    green,
-    //% block="紫"
-    magenta,
-    //% block="水色"
-    cyan,
-    //% block="黄"
-    yellow,
-    //% block="白"
-    white
-}
 
-enum io {
-    //% block="デジタル０１"
-    digital01,
-    //% block="デジタル０２"
-    digital02,
-    //% block="アナログ０３"
-    analog03,
-    //% block="アナログ０４"
-    analog04,
-}
-enum out {
-    //% block="ON"
-    ON,
-    //% block="OFF"
-    OFF,
-    //% block="上"
-    UP,
-    //% block="下"
-    DOWN,
-}
-enum step_speed {
-    //% block="遅い"
-    low,
-    //% block="普通"
-    mid,
-    //% block="速い"
-    hi
-}
-enum step_dir {
-    //% block="正転"
-    cw,
-    //% block="逆転"
-    ccw
-}
-enum tone {
-    //% block="低音"
-    low,
-    //% block="中音"
-    mid,
-    //% block="高音"
-    hi,
-    //% block="無音"
-    no
-}
 let pre_led_value: number
 let pre_numeric: number
 let pre_FullLED_Value: number
@@ -102,136 +40,38 @@ namespace custom {
             pins.digitalReadPin(DigitalPin.P7)
         ])
         disp(-1, 0, 0)
-        led_stepmotor(color_type.black, 0, 0)
+        led_stepmotor(0, 0, 0)
 //        モーター(0)
 //        FullStep = 0
 //        Step = 0
     }
     //% block
-    export function 入力(i: number): any {
-        switch (i) {
-            case 1:
-                return pins.digitalReadPin(DigitalPin.P7)
-                break;
-            case 2:
-                return pins.digitalReadPin(DigitalPin.P6)
-                break;
-            case 3:
-                return pins.analogReadPin(AnalogPin.P4)
-                break;
-            case 4:
-                return pins.analogReadPin(AnalogPin.P3)
-                break;
-            case 5:
-                return pins.digitalReadPin(DigitalPin.P9)
-                break;       }
-    }
-    //% block
-    export function 出力(i: out): any {
-        switch (i) {
-            case out.ON:
-                return 0
-                break;
-            case out.OFF:
-                return 1
-                break;
-            case out.UP:
-                return 0
-                break;
-            case out.DOWN:
-                return 1
-                break;
-        }
-    }
-    //% block
-    export function フルカラーLED(c: color_type): void {
-        let FullLED_Value
-        switch (c) {
-            case color_type.black:
-                FullLED_Value = 0
-                break;
-            case color_type.red:
-                FullLED_Value = 8
-                break;
-            case color_type.blue:
-                FullLED_Value = 4
-                break;
-            case color_type.green:
-                FullLED_Value = 2
-                break;
-            case color_type.magenta:
-                FullLED_Value = 12
-                break;
-            case color_type.cyan:
-                FullLED_Value = 6
-                break;
-            case color_type.yellow:
-                FullLED_Value = 10
-                break;
-            case color_type.white:
-                FullLED_Value = 14
-                break;
-        }
-        //        FullStep = FullLED_Value + Step
-        if (FullLED_Value != pre_FullLED_Value) {
-            pins.digitalWritePin(DigitalPin.P15, 0)
-            let i = 1
-            for (let index = 0; index < 8; index++) {
-                let tmp = Math.trunc(FullLED_Value / i)
-                pins.digitalWritePin(DigitalPin.P14, tmp % 2)
-
-                //クロック発振
-                pins.digitalWritePin(DigitalPin.P13, 0)
-                basic.pause(1)
-                pins.digitalWritePin(DigitalPin.P13, 1)
-                basic.pause(1)
-
-                i = i * 2
-            }
-            pins.digitalWritePin(DigitalPin.P15, 1)
-            
-            for (let index = 0; index < 8; index++) {
-                pins.digitalWritePin(DigitalPin.P14, 0)
-                //クロック発振
-                pins.digitalWritePin(DigitalPin.P13, 0)
-                basic.pause(1)
-                pins.digitalWritePin(DigitalPin.P13, 1)
-                basic.pause(1)
-
-            }
-            pins.digitalWritePin(DigitalPin.P15, 1)
-
-        }
-        pre_FullLED_Value = FullLED_Value
-        pins.digitalWritePin(DigitalPin.P15, 1)
-    }
-    //% block
-    export function led_stepmotor(c: color_type, s: number,deg:number): void {
+    export function led_stepmotor(c: number, s: number,deg:number): void {
      //フルカラーＬＥＤ
         let FullLED_Value
         switch (c) {
-            case color_type.black:
+            case 0:
                 FullLED_Value = 0
                 break;
-            case color_type.red:
+            case 1:
                 FullLED_Value = 8
                 break;
-            case color_type.blue:
+            case 2:
                 FullLED_Value = 4
                 break;
-            case color_type.green:
+            case 3:
                 FullLED_Value = 2
                 break;
-            case color_type.magenta:
+            case 5:
                 FullLED_Value = 12
                 break;
-            case color_type.cyan:
+            case 6:
                 FullLED_Value = 6
                 break;
-            case color_type.yellow:
+            case 4:
                 FullLED_Value = 10
                 break;
-            case color_type.white:
+            case 7:
                 FullLED_Value = 14
                 break;
         }
@@ -306,38 +146,6 @@ namespace custom {
         }
     }
  
-    //% block
-    export function 音(m: tone): void {
-        switch (m) {
-            case tone.hi:
-                pins.analogSetPitchPin(AnalogPin.P0)
-                music.ringTone(698)
-                break;
-            case tone.mid:
-                pins.analogSetPitchPin(AnalogPin.P0)
-                music.ringTone(349)
-                break;
-            case tone.low:
-                pins.analogSetPitchPin(AnalogPin.P0)
-                music.ringTone(175)
-                break;
-            case tone.no:
-                music.stopAllSounds()
-                pins.setAudioPin(AnalogPin.P10)
-                break;
-        }
-    }
-
-    //% block
-    export function モニタ(): void {
-        serial.writeNumbers([
-            pins.analogReadPin(AnalogPin.P3),
-            pins.analogReadPin(AnalogPin.P4),
-            pins.digitalReadPin(DigitalPin.P6),
-            pins.digitalReadPin(DigitalPin.P7)
-        ])
-        basic.pause(1000)
-    }
     /**
      * TODO: describe your function here
      * @param value describe value here, eg: 5
@@ -360,20 +168,6 @@ namespace custom {
         pins.digitalWritePin(DigitalPin.P16, 1)
 
     }
-    //% block
-    export function モーター(value: number): void {
-        if (value == 0) {
-            pins.digitalWritePin(DigitalPin.P12, 0)
-            pins.digitalWritePin(DigitalPin.P8, 0)
-        } else if (value > 0) {
-            pins.digitalWritePin(DigitalPin.P8, 0)
-            pins.analogWritePin(AnalogPin.P12, value)
-        } else {
-            pins.digitalWritePin(DigitalPin.P12, 0)
-            pins.analogWritePin(AnalogPin.P8, Math.abs(value))
-        }
-    }
-
     //% block
     export function disp(numeric: number,led_l: number, led_r: number): void {
 
@@ -456,85 +250,5 @@ namespace custom {
             pre_numeric = 100
         }
         pre_led_value = led_value
-    }
-    //% block
-    export function セグメント数値(numeric: number): void {
-        let led_value
-        if (numeric >= 100) {
-            numeric = 99
-        }
-        let led_l = Math.floor(numeric / 10)
-
-        switch (led_l) {
-            case 0:
-                led_value = 0
-                break;
-            case 1:
-                led_value = 96
-                break;
-            case 2:
-                led_value = 218
-                break;
-            case 3:
-                led_value = 242
-                break;
-            case 4:
-                led_value = 102
-                break;
-            case 5:
-                led_value = 182
-                break;
-            case 6:
-                led_value = 190
-                break;
-            case 7:
-                led_value = 228
-                break;
-            case 8:
-                led_value = 254
-                break;
-            case 9:
-                led_value = 246
-                break;
-        }
-        let led_r = numeric % 10
-        switch (led_r) {
-            case 0:
-                led_value += 252 * 256
-                break;
-            case 1:
-                led_value += 96 * 256
-                break;
-            case 2:
-                led_value += 218 * 256
-                break;
-            case 3:
-                led_value += 242 * 256
-                break;
-            case 4:
-                led_value += 102 * 256
-                break;
-            case 5:
-                led_value += 182 * 256
-                break;
-            case 6:
-                led_value += 190 * 256
-                break;
-            case 7:
-                led_value += 228 * 256
-                break;
-            case 8:
-                led_value += 254 * 256
-                break;
-            case 9:
-                led_value += 246 * 256
-                break;
-        }
-        if (numeric != pre_numeric) {
-            serial_init(led_value)
-        }
-        pre_numeric = numeric
-        pre_led_value = led_value
-
     }
 }
