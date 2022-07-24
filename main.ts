@@ -17,11 +17,14 @@ let num = [
 228,
 254,
 246,
-1
+0
 ]
 basic.forever(function () {
-    music.ringTone(262)
-    basic.pause(2000)
-    music.stopAllSounds()
-    basic.pause(2000)
+    if (pins.analogReadPin(AnalogPin.P3) >= 600) {
+        custom.led_stepmotor(color_type.black, pins.analogReadPin(AnalogPin.P3), 5)
+    } else if (pins.analogReadPin(AnalogPin.P3) <= 400) {
+        custom.led_stepmotor(color_type.black, 1000 - pins.analogReadPin(AnalogPin.P3), 5)
+    } else {
+        custom.led_stepmotor(color_type.black, 0, 0)
+    }
 })

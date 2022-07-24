@@ -101,6 +101,8 @@ namespace custom {
             pins.digitalReadPin(DigitalPin.P6),
             pins.digitalReadPin(DigitalPin.P7)
         ])
+        disp(-1, 0, 0)
+        led_stepmotor(color_type.black, 0, 0)
 //        モーター(0)
 //        FullStep = 0
 //        Step = 0
